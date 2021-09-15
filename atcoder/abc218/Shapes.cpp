@@ -50,19 +50,46 @@ void turn(){
     }
     memcpy(s , ss, sizeof s);
 }
-int main(){
-    ios::sync_with_stdio(false);
-    scanf("%d",&n);
-    for(int i = 0; i < n; i++){
-        scanf("%s",&s[i]);
-    }
-    for(int i = 0; i < n; i++){
-        scanf("%s",&t[i]);
-    }
-    tran(t);
+bool check(){
+    tran(s);
     for(int i = 0; i < n; i++){
         for(int j = 0; j < n; j++){
-            
+            if(s[i][j] == '#'&&t[i][j] != s[i][j]){
+                return 0;
+            }
+            if(t[i][j] == '#'&&t[i][j] != s[i][j]){
+                return 0;//可能t比s多一部分
+            }
         }
     }
+    return 1;
+}
+int main(){
+    //ios::sync_with_stdio(false);
+    scanf("%d",&n);
+    for(int i = 0; i < n; i++){
+        scanf("%s",s[i]);
+    }
+    for(int i = 0; i < n; i++){
+        scanf("%s",t[i]);
+    }
+    tran(t);
+    for(int i = 0; i < 4; i++){
+       /* puts("");
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < n; j++){
+              printf("%c",s[i][j]);
+            }
+            puts("");
+        }
+*/
+        if(check()){
+            puts("Yes");
+            return 0;
+        }
+        turn();
+
+    }
+    puts("No");
+    return 0;
 }
