@@ -9,43 +9,41 @@ long long read(){
 const int N = 1e5 + 11;
 int n,m;
 int v[200],num[200],vv[200];
+int g[N];
 int f[N];
 int main(){
     while(scanf("%d%d",&n,&m)&&n != 0){
         int cnt = 0;
+        memset(f,0,sizeof f);
         for(int i = 1; i <= n; i++){
-            vv[i] = read();
-            f[vv[i]] = 1;
-            /*int x,y;
-            scanf("%d%d",&x,&y);
-            f[x] = 1;
-            while(y--){
-                v[++cnt] = x;
-            }*/
+            v[i] = read();
+            //f[vv[i]] = 1;
         }
         for(int i = 1; i <= n; i++){
             num[i] = read();
         }
-        for(int i = 1; i <= n; i++){
+        /*for(int i = 1; i <= n; i++){
             while(num[i]--){
                 v[++cnt] = vv[i];
             }
-        }
+        }*/
         /*for(int i = 1; i <= cnt; i ++){
             cout << v[i] <<endl;
         }*/
-        for(int i = 1; i <= cnt; i++){
-            for(int j = m; j >= v[i] ; j--){
-                if(f[j - v[i]]){
-                    f[j] = 1;
+        f[0] = 1;
+        for(int i = 1; i <= n; i++){
+            memset(g,0,sizeof g);
+            for(int j = v[i]; j <= m ; j--){
+                if(!f[j] && f[j- v[i]] && g[j - v[i]] < num[i]){
+                    f[j] |= f[j - v[i]];
+                    g[j] = g[j - v[i]] + 1;    
                 }
+                
             }
         }
         int ans = 0;
         for(int i = 1; i <= m; i++){
-            if(f[i] == 1){
-                ans ++;
-            } 
+            ans += f[i];
         }
         printf("%d\n",ans);
     }
