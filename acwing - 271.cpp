@@ -1,33 +1,33 @@
 #include<bits/stdc++.h>
 using namespace std;
-int k;
-int n[10];
-long long f[31][31][31][31][31];
+int n;
+int a[100];
+long long f[32][32][32][32][32];
 int main(){
-    while(scanf("%d",&k)&& k != 0){
-        memset(n,0,sizeof n);
-        for(int i = 1; i <= k; i++){
-            scanf("%d",&n[i]);
+    ios::sync_with_stdio(false);
+    while(cin >> n && n != 0){
+        memset(a,0,sizeof a);
+        for(int i = 1; i <= n ; i ++){
+            cin >> a[i];
         }
         memset(f,0,sizeof f);
         f[0][0][0][0][0] = 1;
-        for(int a = 0; a <= n[1]; a++){
-            for(int b = 0; b <=min(n[2] , a) ; b++){
-                for(int c = 0; c <= min(n[3] , b); c++){
-                    for(int d = 0; d <= min(n[4] , c); d++){
-                        for(int e = 0; e <= min(n[5] , d); e++){
-                            long long &sum = f[a][b][c][d][e];
-                            if(a && a - 1 >= b)sum += f[a-1][b][c][d][e];
-                            if(b && b - 1 >= c)sum += f[a][b-1][c][d][e];
-                            if(c && c - 1 >= d)sum += f[a][b][c-1][d][e];
-                            if(d && d - 1 >= e)sum += f[a][b][c][d-1][e];
-                            if(e)sum += f[a][b][c][d][e-1];
+        for(int i = 0; i <= a[1]; i ++){
+            for(int j = 0 ; j <= min (i,a[2]) ; j++){
+                for(int k = 0 ; k <= min(j,a[3]); k ++){
+                    for(int l = 0 ; l <= min(k,a[4]) ; l++){
+                        for(int m = 0; m <= min (m,a[5]);m++){
+                            long long & sum = f[i][j][k][l][m];
+                            if(i && i - 1 >= j)sum += f[i - 1][j][k][l][m];
+                            if(j && j - 1 >= l)sum += f[i][j - 1][k][l][m];
+                            if(k && k - 1 >= l)sum += f[i][j][k - 1][l][m];
+                            if(l && l - 1 >= m)sum += f[i][j][k][l - 1][m];
+                            if(m) sum += f[i][j][k][l][m - 1];
                         }
                     }
                 }
-
             }
         }
-        cout << f[n[1]][n[2]][n[3]][n[4]][n[5]]<<endl;
+        cout << f[a[1]][a[2]][a[3]][a[4]][a[5]] << endl;
     }
 }
