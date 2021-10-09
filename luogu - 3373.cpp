@@ -133,6 +133,7 @@ signed main(){
             cin >> x >> y;
             cout << query(1,x,y) << endl;
         }
+        
     }
     return 0;
 }

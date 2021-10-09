@@ -5,6 +5,8 @@
         "*.wxml": "html",
         "*.wxss": "css",
         "iostream": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "random": "cpp",
+        "ostream": "cpp"
     }
 }
